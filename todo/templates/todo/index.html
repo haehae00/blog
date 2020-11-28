@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>오늘의 나</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+</head>
+
+<!--    <link rel="stylesheet"  href="{% static 'css/cover.css' %}">-->
+
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+.gradtext {
+
+
+    font-size: 40px;
+    font-weight: bold;
+}
+body{
+    font-family: "빙그레체";
+    }
+    </style>
+    <!-- Custom styles for this template -->
+<!--    {% load static %}-->
+<!--    <link rel="stylesheet" href="{% static '/cover.css' %}">-->
+  </head>
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand" href="/"><span class="gradtext">H</span></h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="/todo/">일정</a>
+          <a class="nav-link" href= "/intro/">소개</a>
+        <a class="nav-link" href= "/home/">기록</a>
+        <a class="nav-link" href= "/friend/">만남</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">오늘의 일.</h1>
+    <p class="lead" style = "container-box ">
+      <div class="col-md-12">
+      <div class="container">
+            <div id="examplel" class="list-group col">
+                <br>
+          {% for list in todo_list %}
+                <br>
+                <div class = "list-group-item" style="width: 342px; left: 93px; ">
+
+                    <input type="checkbox" name="{{list.title}}" value={{list.title}}>
+                    <a href="{{list.pk}}/">{{list.title}}</a>
+                </div>
+          {% endfor %}
+            </div>
+            </div>
+      </div>
+
+    </p>
+    <p class="lead">
+      <a href="insert/" class="btn btn-lg btn-secondary">일정추가</a>
+    </p>
+
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      {% if user.is_authenticated %}
+    {{ user.username }}님
+    <a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+    <form id="logout" method="POST" action="{% url 'account:logout' %}">
+        {% csrf_token %} <input type="hidden" />
+    </form>
+{% else %}
+    <a class="nav-link" href="{% url 'account:login' %}">로그인</a>
+    {% endif %}
+    </div>
+  </footer>
+</div>
+</body>
+</html>
+
+

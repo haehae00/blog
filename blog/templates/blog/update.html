@@ -1,0 +1,16 @@
+{% block content %}
+
+    <br>
+    <div class="container">
+        <h1>글수정</h1>
+        <hr>
+        <br><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p}}
+            <input type="submit" class="btn btn-outline-info" value="수정"/>
+        </form>
+    </div>
+
+{% endblock %}

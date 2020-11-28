@@ -1,0 +1,85 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>오늘의 음식</title>
+</head>
+<body>
+<div class="inner">
+
+	<div style=" padding-top: 50px; padding-bottom: 50px;"><h1>음식<br>
+        후기를<br>
+        작성해주세요</h1></div>
+
+     <button type="button" class="btn btn-outline-info" onclick="location.href ='create/'"style="
+    margin-bottom: 10px;">글쓰기</button>
+    <hr>
+</div>
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-light">
+            <th>번호</th>
+            <th>제목</th>
+            <th >작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for list in posts %}
+        <tr>
+        <td>{{ forloop.counter }}</td>
+        <td style=" width: 450px;">
+            <a href="{{list.pk}}/">{{list.title}}</a>
+        </td>
+        <td >{{ list.pub_date}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table></div>
+</div>
+
+ </table>
+    <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in posts.paginator.page_range %}
+            {% if page_number == posts.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}
+    </body>
+</html>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+
+{% extends 'navbar.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>투표</title>
+</head>
+<body>
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'friend:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}<img src="{{choice.photo.url}}" width="200"><br></label><br/>
+{% endfor %}
+<input type="submit"class='btn btn-info' value="만나기" />
+
+</form>
+
+{% endblock %}
+</body>
+</html>

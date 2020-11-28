@@ -1,0 +1,26 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <div class="alert alert-info" role="alert" style="height: 400px;width: 1000px; top: 73px; padding:50px">
+  <h2 class="alert-heading">과연 그들과 몇 번 만났을까?</h2>
+  <p><h5 style="text-align:center">요새 같은 동네에 사는 친구들과 자주 만나고 있다. 그러던 중 문득 든 생각.
+      나는 친구들을 과연 몇 번이나 만났을까? 그들을 만날 때마다 만난 사람을 투표해보자!</h5></p>
+  <hr>
+  <p class="mb-0" style="margin-top: 70px;">
+      <button type="button" class="btn btn-info" onclick="location.href ='{{ question.id }}/'"style="
+    padding: 25px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 25px; margin-left: 700px;">지금 투표하러 가기</button></p>
+</div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}

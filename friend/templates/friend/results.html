@@ -1,0 +1,30 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결과</title>
+</head>
+<body>
+<div class="card border-secondary mb-3" style="max-width: 40rem; margin-top: 50px;">
+  <div class="card-header"style="text-align:center">{{ question.question_text }}</div>
+  <div class="card-body text-secondary">
+<!--    <h5 class="card-title">Secondary card title</h5>-->
+      <ul>
+    <p class="card-text" >{% for choice in question.choice_set.all %}
+
+    <li>{{ choice.choice_text }}이랑은 {{ choice.votes }}번만났다.</li></p>
+      {% endfor %}
+      </ul>
+      <button type="button" class="btn btn-info" style="
+    margin-left: 400px;" onclick="location.href ='/friend/{{ question.id }}/'">다시투표하러 가기</button></p>
+<!--    <a href="{% url 'friend:detail' question.id %}">Vote again?</a>-->
+  </div>
+</div>
+{% endblock %}
+
+
+</body>
+</html>
+
